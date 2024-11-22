@@ -1,3 +1,13 @@
+import DashboardSearch from './components/dashboardSearch';
+import DashboardSidebar from './components/dashboardSidebar';
+import DashboardView from './components/dashboardView';
+
 export default function Dashboard() {
-  return <h1>dashboard</h1>;
+  return (
+    <section id="dashboard">
+      <DashboardSidebar />
+      <DashboardSearch />
+      <DashboardView />
+    </section>
+  );
 }
