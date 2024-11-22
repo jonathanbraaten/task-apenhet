@@ -5,7 +5,7 @@ import { Countries, PopulationData } from '../types';
 export async function fetchCountries(): Promise<Countries[]> {
   const response = await fetch(
     'https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=10&page=1',
-    { next: { revalidate: 0 } },
+    { next: { revalidate: 3600 } },
   );
   const data = await response.json();
   return data[1];

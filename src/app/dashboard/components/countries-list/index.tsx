@@ -5,10 +5,11 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import Link from 'next/link';
 import styles from './style.module.css';
+
 export default async function CountriesList() {
   const data = await fetchCountries();
   const region: string = data[0]?.region.value || 'No region provided';
-  console.log(region);
+
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
       <Wrapper>
