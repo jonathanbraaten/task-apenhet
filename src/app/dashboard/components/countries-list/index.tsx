@@ -1,28 +1,59 @@
 import { fetchCountries } from '@/app/actions/actions';
 import Wrapper from '@/app/components/wrapper';
+import { abeezee, montserrat } from '@/ui/fonts';
+import Image from 'next/image';
+import clsx from 'clsx';
 import Link from 'next/link';
-
+import styles from './style.module.css';
 export default async function CountriesList() {
   const data = await fetchCountries();
   const region: string = data[0]?.region.value;
+  console.log(region);
   return (
-    <section className="flex flex-col gap-10 py-10">
+    <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
       <Wrapper>
-        <h1>{region}</h1>
+        <h1 className={clsx(abeezee.className, 'text-2xl')}>{region ? region : 'No location'}</h1>
       </Wrapper>
       <hr />
 
       <Wrapper>
         <ul id="country_list__grid">
-          {data.map(({ id, name, capitalCity, incomeLevel }) => (
+          {data.map(({ id, name, capitalCity, iso2Code, incomeLevel }) => (
             <li
-              className="flex flex-col  relative p-5 border rounded-md  hover:bg-gray-100 transition-colors duration-75"
+              className="flex flex-col  group relative p-5 border rounded-md focus:bg-gray-100 active:bg-gray-100  hover:bg-gray-100 transition-colors duration-75"
               key={id}
             >
-              <span>{name}</span>
-              <span>Capital: {capitalCity}</span>
-              <span>Income Level: {incomeLevel.value}</span>
-              <Link className="absolute inset-0" href={`/dashboard/${id}`}></Link>
+              <div className="flex justify-between items-center">
+                <h2 className={clsx(montserrat.className, 'text-lg font-medium')}>{name}</h2>
+                <div className="max-w-[2.5rem] bg-slate-200  border-2 rounded-full">
+                  <Image
+                    src={`https://flagsapi.com/${iso2Code}/flat/64.png`}
+                    alt={`Image of flag for country with iso2code: ${iso2Code}`}
+                    width={50}
+                    height={50}
+                    quality={100}
+                    priority={true}
+                    className="aspect-square p-2"
+                    sizes="(max-width:768px) 100vw, 33vw"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col my-2">
+                <p>
+                  <span>Capital:</span> {capitalCity}
+                </p>
+                <p>
+                  <span>Income Level:</span> {incomeLevel.value}
+                </p>
+              </div>
+
+              <div className=" opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100 transition-opacity">
+                <span className="text-black">View details →</span>
+              </div>
+
+              <Link className="absolute inset-0" href={`/dashboard/${id}`}>
+                <span className="sr-only">View details for {name}</span>
+              </Link>
             </li>
           ))}
         </ul>

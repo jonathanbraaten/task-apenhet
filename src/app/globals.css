@@ -29,5 +29,5 @@ body {
 #country_list__grid {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(225px, 100%), 1fr));
 }
