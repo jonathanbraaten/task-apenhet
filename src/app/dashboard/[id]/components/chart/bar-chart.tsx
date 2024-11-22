@@ -1,6 +1,6 @@
 'use client';
 
-import { Country } from '@/app/types';
+import { PopulationData } from '@/app/types';
 import {
   Bar,
   BarChart,
@@ -12,9 +12,9 @@ import {
   YAxis,
 } from 'recharts';
 
-export default function PopulationChart({ data }: { data: Country }) {
-  const formattedData: Country[] = data
-    .map(({ date, value }: { date: string; value: string }) => {
+export default function PopulationChart({ data }: { data: PopulationData[] }) {
+  const formattedData = data
+    .map(({ date, value }: { date: string; value: number }) => {
       return {
         name: date,
         population: value,
@@ -25,8 +25,8 @@ export default function PopulationChart({ data }: { data: Country }) {
     .reverse();
 
   return (
-    <ResponsiveContainer height="80%">
-      <BarChart width={1200} height={500} data={formattedData}>
+    <ResponsiveContainer width="100%" height="80%">
+      <BarChart data={formattedData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

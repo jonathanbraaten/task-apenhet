@@ -22,7 +22,7 @@ type LendingType = {
   value: string;
 };
 
-export type Country = {
+export type Countries = {
   id: string;
   iso2Code: string;
   name: string;
@@ -33,4 +33,27 @@ export type Country = {
   capitalCity: string;
   longitude: string;
   latitude: string;
+};
+// Types for all countries
+// Types for population
+
+type Indicator = {
+  id: string;
+  value: string;
+};
+
+type Country = {
+  id: string;
+  value: string;
+};
+
+export type PopulationData = {
+  indicator: Indicator;
+  country: Country;
+  countryiso3code: string;
+  date: string;
+  value: number;
+  unit: string;
+  obs_status: string;
+  decimal: number;
 };

@@ -7,7 +7,6 @@ export default function DashboardPage() {
     <section id="dashboard">
       <Search />
       <Sidebar />
-
       <CountriesView />
     </section>
   );

@@ -1,6 +1,5 @@
 import { fetchCountry } from '@/app/actions/actions';
 import PopulationChart from './bar-chart';
-
 export default async function Chart({ id }: { id: string }) {
   const data = await fetchCountry(id);
   return (
