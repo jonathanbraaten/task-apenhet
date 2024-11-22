@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
-import Countries from './components/countries';
+import CountriesList from '../countries-list';
 
-export default function DashboardCountries() {
+export default function CountriesView() {
   return (
     <section id="dashboard-view">
       <Suspense fallback={'..laster'}>
-        <Countries />
+        <CountriesList />
       </Suspense>
     </section>
   );

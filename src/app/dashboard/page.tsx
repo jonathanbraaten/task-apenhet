@@ -1,14 +1,14 @@
-import DashboardSearch from './components/dashboardSearch';
-import DashboardSidebar from './components/dashboardSidebar';
+import Search from '../components/search';
+import Sidebar from '../components/sidebar';
+import CountriesView from './components/countries-view';
 
-import DashboardCountries from './components/dashboardCountries';
-
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
     <section id="dashboard">
-      <DashboardSidebar />
-      <DashboardSearch />
-      <DashboardCountries />
+      <Search />
+      <Sidebar />
+
+      <CountriesView />
     </section>
   );
 }

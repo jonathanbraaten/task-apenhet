@@ -1,13 +1,13 @@
-import DashboardSearch from '../components/dashboardSearch';
-import DashboardSidebar from '../components/dashboardSidebar';
-import DashboardCountry from './components/dashboardCountry';
+import Sidebar from '@/app/components/sidebar';
+import CountryView from './components/country-view';
+import Search from '@/app/components/search';
 
-export default function Dashboard({ params: { id } }: { params: { id: string } }) {
+export default function CountryPage({ params: { id } }: { params: { id: string } }) {
   return (
     <section id="dashboard">
-      <DashboardSidebar />
-      <DashboardSearch />
-      <DashboardCountry id={id} />
+      <Search />
+      <Sidebar />
+      <CountryView id={id} />
     </section>
   );
 }

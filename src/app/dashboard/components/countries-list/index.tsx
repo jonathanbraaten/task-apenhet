@@ -1,8 +1,8 @@
 import { fetchCountries } from '@/app/actions/actions';
-import Wrapper from '../../../../wrapper';
+import Wrapper from '@/app/components/wrapper';
 import Link from 'next/link';
 
-export default async function Countries() {
+export default async function CountriesList() {
   const data = await fetchCountries();
   const region: string = data[0]?.region.value;
   return (
