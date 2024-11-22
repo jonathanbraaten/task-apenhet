@@ -3,7 +3,7 @@ import CountryData from './countryData';
 
 export default function DashboardView() {
   return (
-    <section id="dashboard-view" className="bg-orange-500">
+    <section id="dashboard-view">
       <Suspense fallback={'..laster'}>
         <CountryData />
       </Suspense>

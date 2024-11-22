@@ -6,9 +6,9 @@ type Props = {
 export default function Chart({ id, onClick }: Props) {
   console.log(id, ' in Chart');
   return (
-    <>
-      <p onClick={onClick}>Go back</p>
+    <section>
+      <button onClick={onClick}>Go back</button>
       <h1>Chart</h1>
-    </>
+    </section>
   );
 }
