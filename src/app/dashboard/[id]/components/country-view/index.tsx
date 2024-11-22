@@ -3,10 +3,10 @@ import Chart from '../chart';
 
 export default function CountryView({ id }: { id: string }) {
   return (
-    <section id="dashboard-view">
+    <main id="dashboard-view">
       <Suspense fallback={'..laster'}>
         <Chart id={id} />
       </Suspense>
-    </section>
+    </main>
   );
 }

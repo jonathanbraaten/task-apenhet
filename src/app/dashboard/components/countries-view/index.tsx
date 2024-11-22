@@ -4,10 +4,10 @@ import CountriesSkeleton from '@/ui/skeleton/countriesSkeleton';
 
 export default function CountriesView() {
   return (
-    <section id="dashboard-view">
+    <main id="dashboard-view">
       <Suspense fallback={<CountriesSkeleton limit={10} />}>
         <CountriesList />
       </Suspense>
-    </section>
+    </main>
   );
 }
