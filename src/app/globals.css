@@ -11,7 +11,7 @@ body {
   display: grid;
   grid-template-areas:
     'dashboard-sidebar dashboard-search'
-    'dashboard-sidebar dashboard-view';
+    'dashboard-sidebar dashboard-ui';
   grid-template-columns: auto 1fr;
   grid-template-rows: 5rem 1fr;
 }
@@ -19,8 +19,8 @@ body {
 #dashboard-search {
   grid-area: dashboard-search;
 }
-#dashboard-view {
-  grid-area: dashboard-view;
+#dashboard-ui {
+  grid-area: dashboard-ui;
 }
 #dashboard-sidebar {
   grid-area: dashboard-sidebar;
