@@ -8,7 +8,9 @@ import styles from './style.module.css';
 import Pagination from './pagination';
 
 export default async function CountriesList({ page }: { page: string }) {
+  const pageNum = Numbne;
   const [metadata, data] = await fetchCountries({ page });
+
   const region = data[0]?.region.value || 'No region provided';
 
   return (
