@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import CountriesList from '../countries-list';
 import CountriesSkeleton from '@/ui/skeleton/countriesSkeleton';
 
-export default function CountriesView({ page }: { page: string }) {
+export default function CountriesView({ page }: { page: number }) {
   return (
     <main id="dashboard-view">
       <Suspense fallback={<CountriesSkeleton limit={10} />}>
