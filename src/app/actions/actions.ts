@@ -1,27 +1,50 @@
 'use server';
+import { PopulationData, WorldBankAPIResponse } from '../types';
 
-import { Countries, PopulationData } from '../types';
+const revalidationTime = 3600;
+async function initialResponse(): Promise<WorldBankAPIResponse> {
+  try {
+    const initialResponse = await fetch(
+      `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=1`,
+      { next: { revalidate: revalidationTime } },
+    );
+    const data = await initialResponse.json();
 
-export async function fetchCountries({ page = 1 }): Promise<Countries[]> {
+    if (!Array.isArray(data) || data.length < 2) {
+      throw new Error('Invalid API response format');
+    }
+    const [metadata, firstPageData] = data as WorldBankAPIResponse;
+    return [metadata, firstPageData];
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Unknown error occurred');
+  }
+}
+
+export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse> {
   if (!page || page < 1) {
     page = 1;
   }
 
-  const response = await fetch(
-    `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=${String(page)}`,
-    { next: { revalidate: 3600 } },
-  );
-  const [metadata, data] = await response.json();
-
-  if (metadata.page > metadata.pages) {
-    const firstPageResponse = await fetch(
-      `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=1`,
-      { next: { revalidate: 3600 } },
+  try {
+    const response = await fetch(
+      `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=${page}`,
+      { next: { revalidate: revalidationTime, tags: ['countries'] } },
     );
-    const [metadata, firstPageData] = await firstPageResponse.json();
-    return [metadata, firstPageData];
+    const [metadata, data] = await response.json();
+
+    if (page > metadata.pages) {
+      page = 1;
+    }
+    if (metadata.page > metadata.pages) {
+      return await initialResponse();
+    }
+    return [metadata, data];
+  } catch (error) {
+    return await initialResponse();
   }
-  return [metadata, data];
 }
 
 export async function fetchCountry(id: string): Promise<PopulationData[]> {
