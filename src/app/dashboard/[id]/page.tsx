@@ -1,6 +1,5 @@
 import Sidebar from '@/app/components/sidebar';
 import CountryView from './components/country-view';
-import Search from '@/app/components/search';
 import Link from 'next/link';
 
 export default async function CountryPage({ params }: { params: { id: string } }) {
