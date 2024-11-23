@@ -34,7 +34,17 @@ export type Countries = {
   longitude: string;
   latitude: string;
 };
+
+type CountryMetadata = {
+  page: number;
+  pages: number;
+  per_page: string;
+  total: number;
+};
+
+export type WorldBankAPIResponse = [CountryMetadata, Countries[]];
 // Types for all countries
+
 // Types for population
 
 type Indicator = {

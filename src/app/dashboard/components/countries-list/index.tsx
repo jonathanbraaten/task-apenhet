@@ -5,15 +5,17 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import Link from 'next/link';
 import styles from './style.module.css';
+import Pagination from './pagination';
 
-export default async function CountriesList() {
-  const data = await fetchCountries();
-  const region: string = data[0]?.region.value || 'No region provided';
+export default async function CountriesList({ page }: { page: number }) {
+  const [metadata, data] = await fetchCountries({ page });
+  const region = data[0]?.region.value || 'No region provided';
 
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
-      <Wrapper>
+      <Wrapper optionalStyle="flex justify-between items-center">
         <h1 className={clsx(abeezee.className, 'text-2xl')}>{region}</h1>
+        <Pagination totalPages={metadata.pages} />
       </Wrapper>
       <hr />
 

@@ -1,3 +1,9 @@
-export default function Wrapper({ children }: { children: React.ReactNode }) {
-  return <div className="px-12">{children}</div>;
+import clsx from 'clsx';
+type Props = {
+  optionalStyle?: string;
+  children: React.ReactNode;
+};
+
+export default function Wrapper({ optionalStyle, children }: Props) {
+  return <div className={clsx(optionalStyle, 'px-12')}>{children}</div>;
 }
