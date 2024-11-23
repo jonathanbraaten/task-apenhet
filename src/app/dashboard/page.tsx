@@ -7,8 +7,8 @@ export default async function DashboardPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { page } = await searchParams;
-  console.log(page, 'Params');
+  const { page = '1' } = await searchParams;
+
   return (
     <section id="dashboard">
       <Search />

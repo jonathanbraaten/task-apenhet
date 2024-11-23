@@ -9,15 +9,13 @@ import Pagination from './pagination';
 
 export default async function CountriesList({ page }: { page: string }) {
   const [metadata, data] = await fetchCountries({ page });
-  /*   const region: string = data?.region.value || 'No region provided';
-   */
+  const region = data[0]?.region.value || 'No region provided';
 
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
-      <Pagination totalPages={metadata.pages} />
-      <Wrapper>
-        {/*         <h1 className={clsx(abeezee.className, 'text-2xl')}>{region}</h1>
-         */}{' '}
+      <Wrapper optionalStyle="flex justify-between items-center">
+        <h1 className={clsx(abeezee.className, 'text-2xl')}>{region}</h1>
+        <Pagination totalPages={metadata.pages} />
       </Wrapper>
       <hr />
 

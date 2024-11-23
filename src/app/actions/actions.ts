@@ -19,7 +19,6 @@ export async function fetchCountries({ page = '1' }): Promise<Countries[]> {
       `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=1`,
       { next: { revalidate: 3600 } },
     );
-
     const [, firstPageData] = await firstPageResponse.json();
     return firstPageData;
   }
