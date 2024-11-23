@@ -1,9 +1,8 @@
 import Sidebar from '@/app/components/sidebar';
 import CountryView from './components/country-view';
-import Search from '@/app/components/search';
 import Link from 'next/link';
-
-export default async function CountryPage({ params }: { params: { id: string } }) {
+//params: Promise<{ id: string }>
+export default async function CountryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   return (
     <section id="dashboard">

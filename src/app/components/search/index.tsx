@@ -1,6 +1,5 @@
 'use client';
-import { useSearch } from '@/app/store/store';
-import { ChangeEvent, useState } from 'react';
+
 export default function Search() {
   return (
     <header id="dashboard-search" className="bg-purple-100 flex items-center  justify-center">
