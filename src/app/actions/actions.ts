@@ -19,7 +19,7 @@ async function initialResponse(): Promise<WorldBankAPIResponse> {
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('Unknown error occurred');
+    throw new Error(`Unexpected error: ${typeof error}`);
   }
 }
 
