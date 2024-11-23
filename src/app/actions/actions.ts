@@ -55,12 +55,26 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
 }
 
 export async function fetchCountry(id: string): Promise<PopulationData[]> {
-  const response = await fetch(
+  const storage = [];
+  const initialFetch = await fetch(
     `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json`,
     {
-      next: { revalidate: 0 },
+      next: { revalidate: 3600 },
     },
   );
-  const data = await response.json();
-  return data[1];
+  const [metadata] = await initialFetch.json();
+  const meta = { ...metadata };
+  meta.page = 0;
+  while (meta.page < meta.pages) {
+    ++meta.page;
+    const response = await fetch(
+      `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json&page=${meta.page}`,
+      {
+        cache: 'force-cache',
+      },
+    );
+    const [, data] = await response.json();
+    storage.push(...data);
+  }
+  return storage;
 }
