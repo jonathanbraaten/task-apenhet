@@ -33,17 +33,19 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
       `https://api.worldbank.org/v2/country?format=json&region=EUU&per_page=15&page=${page}`,
       { next: { revalidate: revalidationTime, tags: ['countries'] } },
     );
-    const [metadata, data] = await response.json();
+    const data = await response.json();
+
     if (!Array.isArray(data) || data.length < 2) {
       throw new Error('Invalid API response');
     }
+    const [metadata, countries] = data as WorldBankAPIResponse;
     if (page > metadata.pages) {
       page = 1;
     }
     if (metadata.page > metadata.pages) {
       return await initialResponse();
     }
-    return [metadata, data];
+    return [metadata, countries];
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
