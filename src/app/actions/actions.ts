@@ -11,7 +11,7 @@ async function initialResponse(): Promise<WorldBankAPIResponse> {
     const data = await initialResponse.json();
 
     if (!Array.isArray(data) || data.length < 2) {
-      throw new Error('Invalid API response format');
+      throw new Error('Invalid API response');
     }
     const [metadata, firstPageData] = data as WorldBankAPIResponse;
     return [metadata, firstPageData];
@@ -34,7 +34,9 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
       { next: { revalidate: revalidationTime, tags: ['countries'] } },
     );
     const [metadata, data] = await response.json();
-
+    if (!Array.isArray(data) || data.length < 2) {
+      throw new Error('Invalid API response');
+    }
     if (page > metadata.pages) {
       page = 1;
     }
@@ -43,6 +45,9 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
     }
     return [metadata, data];
   } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
     return await initialResponse();
   }
 }
