@@ -2,12 +2,18 @@ import Search from '../components/search';
 import Sidebar from '../components/sidebar';
 import CountriesView from './components/countries-view';
 
-export default function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { page } = await searchParams;
+  console.log(page, 'Params');
   return (
     <section id="dashboard">
       <Search />
       <Sidebar />
-      <CountriesView />
+      <CountriesView page={String(page)} />
     </section>
   );
 }
