@@ -70,7 +70,7 @@ export async function fetchCountry(id: string): Promise<PopulationData[]> {
     const response = await fetch(
       `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json&page=${meta.page}`,
       {
-        next: { revalidate: 3600 },
+        cache: 'force-cache',
       },
     );
     const [, data] = await response.json();
