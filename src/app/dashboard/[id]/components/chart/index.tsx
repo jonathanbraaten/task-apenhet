@@ -2,7 +2,6 @@ import { fetchCountry } from '@/app/actions/actions';
 import PopulationChart from './bar-chart';
 import Wrapper from '@/app/components/wrapper';
 import clsx from 'clsx';
-import Link from 'next/link';
 import Image from 'next/image';
 import { abeezee } from '@/ui/fonts';
 export default async function Chart({ id }: { id: string }) {
