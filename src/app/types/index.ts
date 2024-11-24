@@ -27,7 +27,7 @@ export type Countries = {
   iso2Code: string;
   name: string;
   region: Region;
-  adminregion: AdminRegion;
+  adminRegion: AdminRegion;
   incomeLevel: IncomeLevel;
   lendingType: LendingType;
   capitalCity: string;
