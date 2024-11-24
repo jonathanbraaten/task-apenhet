@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-export default function LineChartNavigation({ id }: { id: string }) {
+export default function ChartNavigation({ id }: { id: string }) {
   const searchParams = useSearchParams();
   const search = searchParams.get('chart');
 

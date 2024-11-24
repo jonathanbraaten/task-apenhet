@@ -1,18 +1,21 @@
 'use client';
 
+import { fetchStoreData } from '@/app/store/store';
 import { PopulationData } from '@/app/types';
+import { useEffect } from 'react';
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
   Legend,
-  Line,
-  LineChart,
+  Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 
-export default function LineChartByYear({ data }: { data: PopulationData[] }) {
+export default function PopulationGrowthByYearChart({ data }: { data: PopulationData[] }) {
   const formattedData = data
     .map(({ date, value }: { date: string; value: number }) => {
       return {
@@ -26,7 +29,7 @@ export default function LineChartByYear({ data }: { data: PopulationData[] }) {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart
+      <BarChart
         width={500}
         height={300}
         data={formattedData}
@@ -39,16 +42,15 @@ export default function LineChartByYear({ data }: { data: PopulationData[] }) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis
-          style={{
-            fontSize: 15,
-          }}
-        />
+        <YAxis dataKey="population" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="population" stroke="#28d886" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey="date" stroke="#8884d8" activeDot={{ r: 8 }} />
-      </LineChart>
+        <Bar
+          dataKey="population"
+          fill="#60a5fa"
+          activeBar={<Rectangle fill="pink" stroke="blue" />}
+        />
+      </BarChart>
     </ResponsiveContainer>
   );
 }
