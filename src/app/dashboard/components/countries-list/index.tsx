@@ -54,7 +54,7 @@ export default async function CountriesList({ page }: { page: number }) {
                 <span className="text-black">View details →</span>
               </div>
 
-              <Link className="absolute inset-0" href={`/dashboard/${id}`}>
+              <Link className="absolute inset-0" href={`/dashboard/${id}?chart=growthByYear`}>
                 <span className="sr-only">View details for {name}</span>
               </Link>
             </li>

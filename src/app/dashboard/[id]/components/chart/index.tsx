@@ -1,37 +1,42 @@
 import { fetchCountry } from '@/app/actions/actions';
 import LineChartByYear from './line-chart-by-year';
 import LineChartByRate from './line-chart-by-rate';
-import Wrapper from '@/app/components/wrapper';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { abeezee } from '@/ui/fonts';
 
-export default async function Chart({ id }: { id: string }) {
+import clsx from 'clsx';
+import Link from 'next/link';
+
+export default async function Chart({ id, params }: { id: string; params: string }) {
   const data = await fetchCountry(id);
-  const countryName = data[0]?.country.value || 'No name';
-  const countryId = data[0].country.id || 0;
+  const renderChart = () => {
+    switch (params) {
+      case 'growthByYear':
+        return <LineChartByYear data={data} />;
+      case 'growthByRate':
+        return <LineChartByRate data={data} />;
+    }
+  };
 
   return (
-    <section className={clsx('flex flex-col gap-10 py-10 h-full ')}>
-      <Wrapper>
-        <div className="flex items-center gap-2">
-          <h1 className={clsx(abeezee.className, 'text-2xl')}>{countryName}</h1>
-          <Image
-            src={`https://flagsapi.com/${countryId}/flat/64.png`}
-            alt={`Image of flag for country with iso2code: ${countryId}`}
-            width={50}
-            height={50}
-            quality={100}
-            priority={true}
-            className="aspect-square p-2"
-            sizes="(max-width:768px) 100vw, 33vw"
-          />
-        </div>
-      </Wrapper>
+    <section className={clsx('flex flex-col gap-5  h-full ')}>
       <hr />
-      <div className="h-full flex items-center px-12 ">
-        <LineChartByRate data={data} />
-        <LineChartByYear data={data} />
+      <div className="h-full flex gap-5 flex-col items-center   px-14 ">
+        <div className="text-md font-medium flex gap-4">
+          <Link
+            className=" flex items-center rounded-md px-2 p-1 bg-purple-300"
+            href={`/dashboard/${id}?chart=growthByYear`}
+          >
+            {' '}
+            <span>Growth by year</span>
+          </Link>
+          <Link
+            className="bg-blue-300 flex items-center rounded-md px-3"
+            href={`/dashboard/${id}?chart=growthByRate`}
+          >
+            {' '}
+            <span> Growth by rate</span>
+          </Link>
+        </div>
+        {renderChart()}
       </div>
     </section>
   );

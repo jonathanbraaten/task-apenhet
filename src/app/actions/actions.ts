@@ -54,12 +54,12 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
   }
 }
 
-export async function fetchCountry(id: string): Promise<PopulationData[]> {
+export async function fetchCountry(id: string, revalidate = 3600): Promise<PopulationData[]> {
   const storage = [];
   const initialFetch = await fetch(
     `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json`,
     {
-      next: { revalidate: 3600 },
+      next: { revalidate: revalidate },
     },
   );
   const [metadata] = await initialFetch.json();

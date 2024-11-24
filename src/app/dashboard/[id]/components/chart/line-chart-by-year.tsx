@@ -39,7 +39,11 @@ export default function LineChartByYear({ data }: { data: PopulationData[] }) {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis />
+        <YAxis
+          style={{
+            fontSize: 15,
+          }}
+        />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="population" stroke="#28d886" activeDot={{ r: 8 }} />

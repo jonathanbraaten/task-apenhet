@@ -1,21 +1,36 @@
 import Sidebar from '@/app/components/sidebar';
 import CountryView from './components/country-view';
+import { fetchCountry } from '@/app/actions/actions';
+import { abeezee } from '@/ui/fonts';
+import clsx from 'clsx';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
 import Link from 'next/link';
-//params: Promise<{ id: string }>
-export default async function CountryPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CountryPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const { id } = await params;
+  const { chart = 'growthByYear' } = await searchParams;
+  const chartState = chart === 'growthByYear' || chart === 'growthByRate' ? chart : 'growthByYear';
+  const data = await fetchCountry(id, 7200);
+  const countryName = data[0]?.country.value || 'No name';
   return (
     <section id="dashboard">
-      <header id="search" className="flex items-center px-12">
+      <header id="search" className="flex items-center  px-14 ">
         <Link
-          className="bg-gray-200 px-2 inline-flex rounded-full text-xl font-medium  items-center hover:bg-gray-300 duration-75 "
+          className="bg-black  font-medium text-md  rounded-full  items-center hover:bg-black/90 duration-75 "
           href={'/dashboard'}
         >
-          <span> Go back</span>
+          <FaLongArrowAltLeft size={30} className="p-1 w-[2.1rem] h-[2.1rem] text-white" />
+          {/*    <span>Go back</span> */}
         </Link>
+        <h1 className={clsx(abeezee.className, 'text-2xl mx-auto')}>{countryName}</h1>
       </header>
       <Sidebar />
-      <CountryView id={id} />
+      <CountryView params={chartState} id={id} />
     </section>
   );
 }
