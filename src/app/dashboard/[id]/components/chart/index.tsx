@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { PopulationData } from '@/app/types';
 import { abeezee } from '@/ui/fonts';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
+import LineChartNavigation from './line-chart-navigation';
 
 async function fetchData(id: string): Promise<PopulationData[] | null> {
   try {
@@ -51,9 +52,10 @@ export default async function Chart({ id, params }: { id: string; params: string
       <hr />
       <div className="h-full flex gap-5 flex-col items-center   px-14 ">
         {data && (
-          <div className="text-md font-medium flex gap-4">
+          <LineChartNavigation id={id} />
+          /*  <div className="text-md font-medium flex gap-4">
             <Link
-              className=" flex items-center rounded-md px-2 p-1 bg-purple-300"
+              className={clsx('flex items-center rounded-md px-2 p-1 bg-purple-300', {})}
               href={`/dashboard/${id}?chart=growthByYear`}
             >
               {' '}
@@ -66,7 +68,7 @@ export default async function Chart({ id, params }: { id: string; params: string
               {' '}
               <span> Growth by rate</span>
             </Link>
-          </div>
+          </div> */
         )}
         {renderChart()}
       </div>
