@@ -20,7 +20,7 @@ export default function AnnualPopulationChart({ data }: { data: PopulationData[]
       const growth = ((currentPopulation - previousPopulation) / previousPopulation) * 100;
       return {
         ...item,
-        'Population growth': growth,
+        'Annual population growth': growth,
       };
     })
     .reverse();
@@ -42,7 +42,12 @@ export default function AnnualPopulationChart({ data }: { data: PopulationData[]
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="Population growth" stroke="#60a5fa" activeDot={{ r: 8 }} />
+        <Line
+          type="monotone"
+          dataKey="Annual population growth"
+          stroke="#60a5fa"
+          activeDot={{ r: 8 }}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

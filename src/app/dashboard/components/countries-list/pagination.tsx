@@ -26,7 +26,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 py-5">
       <button
         onClick={() => handlePaginatePrev()}
         className={clsx('bg-black text-white rounded-full', {

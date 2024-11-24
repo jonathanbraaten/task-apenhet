@@ -5,7 +5,9 @@ import clsx from 'clsx';
 import styles from './style.module.css';
 import Pagination from './pagination';
 import CountriesCard from './countries-card';
-import CountriesNav from './countries-nav';
+
+import Attribution from '@/app/components/attribution';
+import CountriesCardSkeleton from '@/ui/skeleton/countries-card-skeleton';
 
 export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
@@ -19,11 +21,11 @@ export default async function CountriesList({ page }: { page: number }) {
         </h1>
       </Wrapper>
       <hr />
-
       <Wrapper>
-        <CountriesNav>
+        <div className="flex justify-end">
           <Pagination totalPages={metadata.pages} />
-        </CountriesNav>
+        </div>
+
         <ul id="country_list__grid">
           {data.map(({ id, name, capitalCity, iso2Code }) => (
             <CountriesCard
@@ -36,6 +38,8 @@ export default async function CountriesList({ page }: { page: number }) {
           ))}
         </ul>
       </Wrapper>
+
+      <Attribution />
     </section>
   );
 }

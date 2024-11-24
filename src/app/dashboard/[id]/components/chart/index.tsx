@@ -8,6 +8,8 @@ import { PopulationData } from '@/app/types';
 import { abeezee } from '@/ui/fonts';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import ChartNavigation from './chart-navigation';
+import Wrapper from '@/app/components/wrapper';
+import Attribution from '@/app/components/attribution';
 
 async function fetchData(id: string): Promise<PopulationData[] | null> {
   try {
@@ -22,7 +24,7 @@ async function fetchData(id: string): Promise<PopulationData[] | null> {
   }
 }
 
-export default async function Chart({ id, params }: { id: string; params: string }) {
+export default async function Charts({ id, params }: { id: string; params: string }) {
   const data = await fetchData(id);
   if (!data) {
     //make components
@@ -54,6 +56,8 @@ export default async function Chart({ id, params }: { id: string; params: string
         {data && <ChartNavigation id={id} />}
         {renderChart()}
       </div>
+
+      <Attribution />
     </section>
   );
 }

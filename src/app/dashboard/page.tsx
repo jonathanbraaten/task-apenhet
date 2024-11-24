@@ -9,7 +9,7 @@ export default async function DashboardPage({
   const currentPage = Number(page);
 
   return (
-    <section className="grow">
+    <section className="grow ">
       <RenderCountries page={currentPage} />
     </section>
   );

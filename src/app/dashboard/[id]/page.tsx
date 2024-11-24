@@ -1,5 +1,5 @@
 import { fetchCountry } from '@/app/actions/fetchCountry';
-import RenderCountry from './components/render-country';
+import RenderCharts from './components/render-charts';
 
 import { abeezee } from '@/ui/fonts';
 import clsx from 'clsx';
@@ -29,7 +29,7 @@ export default async function CountryPage({
         <h1 className={clsx(abeezee.className, 'text-2xl mx-auto')}>{countryName}</h1>
       </header>
 
-      <RenderCountry params={chartState} id={id} />
+      <RenderCharts params={chartState} id={id} />
     </section>
   );
 }

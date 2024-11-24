@@ -19,7 +19,7 @@ export default function PopulationGrowthByYearChart({ data }: { data: Population
     .map(({ date, value }: { date: string; value: number }) => {
       return {
         date: date,
-        population: value,
+        Population: value,
         uv: value,
         amt: value,
       };
@@ -41,11 +41,11 @@ export default function PopulationGrowthByYearChart({ data }: { data: Population
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
-        <YAxis dataKey="population" />
+        <YAxis dataKey="Population" />
         <Tooltip />
         <Legend />
         <Bar
-          dataKey="population"
+          dataKey="Population"
           fill="#60a5fa"
           activeBar={<Rectangle fill="pink" stroke="blue" />}
         />

@@ -1,13 +1,16 @@
 import { Suspense } from 'react';
 import CountriesList from '../countries-list';
-import CountriesSkeleton from '@/ui/skeleton/countriesSkeleton';
+import CountriesCardSkeleton from '@/ui/skeleton/countries-card-skeleton';
+import Link from 'next/link';
 
 export default function RenderCountries({ page }: { page: number }) {
   return (
-    <main className="h-full">
-      <Suspense fallback={<CountriesSkeleton limit={10} />}>
-        <CountriesList page={page} />
-      </Suspense>
-    </main>
+    <>
+      <main className="h-full">
+        <Suspense fallback={<CountriesCardSkeleton limit={15} />}>
+          <CountriesList page={page} />
+        </Suspense>
+      </main>
+    </>
   );
 }
