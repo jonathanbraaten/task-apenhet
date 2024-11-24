@@ -4,7 +4,7 @@ import CountriesSkeleton from '@/ui/skeleton/countriesSkeleton';
 
 export default function CountriesView({ page }: { page: number }) {
   return (
-    <main id="dashboard-view">
+    <main className="h-full">
       <Suspense fallback={<CountriesSkeleton limit={10} />}>
         <CountriesList page={page} />
       </Suspense>

@@ -18,18 +18,17 @@ export default async function CountryPage({
   const data = await fetchCountry(id, 7200);
   const countryName = data[0]?.country.value || 'No name';
   return (
-    <section id="dashboard">
-      <header id="search" className="flex items-center  px-14 ">
+    <section className="grow">
+      <header className="flex items-center  px-14 h-[5rem] ">
         <Link
           className="bg-black  font-medium text-md  rounded-full  items-center hover:bg-black/90 duration-75 "
           href={'/dashboard'}
         >
           <FaLongArrowAltLeft size={30} className="p-1 w-[2.1rem] h-[2.1rem] text-white" />
-          {/*    <span>Go back</span> */}
         </Link>
         <h1 className={clsx(abeezee.className, 'text-2xl mx-auto')}>{countryName}</h1>
       </header>
-      <Sidebar />
+
       <CountryView params={chartState} id={id} />
     </section>
   );

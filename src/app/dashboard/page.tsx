@@ -1,5 +1,3 @@
-import Search from '../components/search';
-import Sidebar from '../components/sidebar';
 import CountriesView from './components/countries-view';
 
 export default async function DashboardPage({
@@ -11,9 +9,7 @@ export default async function DashboardPage({
   const currentPage = Number(page);
 
   return (
-    <section id="dashboard">
-      <Search />
-      <Sidebar />
+    <section className="grow">
       <CountriesView page={currentPage} />
     </section>
   );

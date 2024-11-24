@@ -4,26 +4,7 @@
 
 body {
   min-height: 100vh;
-}
-
-#dashboard {
-  height: 100vh;
-  display: grid;
-  grid-template-areas:
-    'dashboard-sidebar dashboard-search'
-    'dashboard-sidebar dashboard-view';
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 5rem 1fr;
-}
-
-#dashboard-search {
-  grid-area: dashboard-search;
-}
-#dashboard-view {
-  grid-area: dashboard-view;
-}
-#dashboard-sidebar {
-  grid-area: dashboard-sidebar;
+  display: flex;
 }
 
 #country_list__grid {
