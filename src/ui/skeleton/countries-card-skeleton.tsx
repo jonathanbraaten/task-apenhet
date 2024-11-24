@@ -8,7 +8,7 @@ export default function CountriesCardSkeleton({ limit = 5 }: { limit?: number })
   const skeletons = createArray(limit);
 
   return (
-    <section className={clsx('flex flex-col gap-10 py-10 h-full ')}>
+    <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
       <Wrapper>
         <div className={clsx(abeezee.className, 'text-2xl')}>
           <div className="h-8 w-32 bg-gray-200 animate-pulse rounded-md"></div>

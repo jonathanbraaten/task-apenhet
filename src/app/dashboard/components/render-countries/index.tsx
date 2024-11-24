@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import CountriesList from '../countries-list';
 import CountriesCardSkeleton from '@/ui/skeleton/countries-card-skeleton';
-import Link from 'next/link';
 
 export default function RenderCountries({ page }: { page: number }) {
   return (

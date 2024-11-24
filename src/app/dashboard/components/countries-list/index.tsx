@@ -5,9 +5,7 @@ import clsx from 'clsx';
 import styles from './style.module.css';
 import Pagination from './pagination';
 import CountriesCard from './countries-card';
-
 import Attribution from '@/app/components/attribution';
-import CountriesCardSkeleton from '@/ui/skeleton/countries-card-skeleton';
 
 export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
