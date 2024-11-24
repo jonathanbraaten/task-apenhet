@@ -1,5 +1,6 @@
-import CountryView from './components/country-view';
-import { fetchCountry } from '@/app/actions/actions';
+import { fetchCountry } from '@/app/actions/fetchCountry';
+import RenderCountry from './components/render-country';
+
 import { abeezee } from '@/ui/fonts';
 import clsx from 'clsx';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
@@ -28,7 +29,7 @@ export default async function CountryPage({
         <h1 className={clsx(abeezee.className, 'text-2xl mx-auto')}>{countryName}</h1>
       </header>
 
-      <CountryView params={chartState} id={id} />
+      <RenderCountry params={chartState} id={id} />
     </section>
   );
 }
