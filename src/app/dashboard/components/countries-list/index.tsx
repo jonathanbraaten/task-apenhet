@@ -10,6 +10,7 @@ import Pagination from './pagination';
 export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
   const region = data[0]?.region.value || 'No region provided';
+  console.log(data);
 
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
@@ -21,7 +22,7 @@ export default async function CountriesList({ page }: { page: number }) {
 
       <Wrapper>
         <ul id="country_list__grid">
-          {data.map(({ id, name, capitalCity, iso2Code, incomeLevel }) => (
+          {data.map(({ id, name, capitalCity, iso2Code }) => (
             <li
               className="flex flex-col  group relative p-5 border rounded-md focus:bg-gray-100 active:bg-gray-100  hover:bg-gray-100 transition-colors duration-75"
               key={id}
@@ -44,9 +45,6 @@ export default async function CountriesList({ page }: { page: number }) {
               <div className="flex flex-col my-2">
                 <p>
                   <span>Capital:</span> {capitalCity}
-                </p>
-                <p>
-                  <span>Income Level:</span> {incomeLevel.value}
                 </p>
               </div>
 
