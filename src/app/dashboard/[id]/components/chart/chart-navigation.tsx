@@ -19,7 +19,7 @@ export default function ChartNavigation({ id }: { id: string }) {
             href={`/dashboard/${id}?${generateChartParams('growthByYear')}`}
           >
             {' '}
-            <span>Population growth by year</span>
+            <span>Population</span>
           </Link>
         </li>
         <li>
