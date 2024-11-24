@@ -1,6 +1,0 @@
-.background_pattern {
-  background-color: #f5f5fc;
-  opacity: 0.8;
-  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #f5f5fc 10px),
-    repeating-linear-gradient(#ffffff55, #ffffff);
-}

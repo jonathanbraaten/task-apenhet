@@ -2,7 +2,7 @@ import { fetchCountries } from '@/app/actions/fetchCountries';
 import Wrapper from '@/app/components/wrapper';
 import { abeezee } from '@/ui/fonts';
 import clsx from 'clsx';
-import styles from './style.module.css';
+
 import Pagination from './pagination';
 import CountriesCard from './countries-card';
 import Attribution from '@/app/components/attribution';
@@ -12,7 +12,7 @@ export default async function CountriesList({ page }: { page: number }) {
   const region = data[0]?.region.value || 'No region provided';
 
   return (
-    <section className={clsx(styles.background_pattern, 'flex flex-col py-10 h-full ')}>
+    <section className={clsx('flex flex-col py-10 h-full ')}>
       <Wrapper optionalStyle="flex justify-between items-center">
         <h1 className={clsx(abeezee.className, 'text-2xl py-5')}>
           Historical populations and growth rate for the countries in {region}
@@ -24,7 +24,7 @@ export default async function CountriesList({ page }: { page: number }) {
           <Pagination totalPages={metadata.pages} />
         </div>
 
-        <ul id="country_list__grid">
+        <ul className="country_list__grid">
           {data.map(({ id, name, capitalCity, iso2Code }) => (
             <CountriesCard
               key={id}

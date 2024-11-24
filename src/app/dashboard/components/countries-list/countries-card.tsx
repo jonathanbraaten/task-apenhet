@@ -32,7 +32,7 @@ export default function CountriesCard({ id, iso2Code, capitalCity, name }: Props
         </p>
       </div>
 
-      <div className=" opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100 transition-opacity">
+      <div>
         <span className="text-black">View details →</span>
       </div>
 
