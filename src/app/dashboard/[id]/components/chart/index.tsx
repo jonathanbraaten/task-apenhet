@@ -1,9 +1,11 @@
 import { fetchCountry } from '@/app/actions/actions';
 import PopulationChart from './bar-chart';
+import LineChartRate from './line-chart-rate';
 import Wrapper from '@/app/components/wrapper';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { abeezee } from '@/ui/fonts';
+
 export default async function Chart({ id }: { id: string }) {
   const data = await fetchCountry(id);
   const countryName = data[0]?.country.value || 'No name';
@@ -28,6 +30,7 @@ export default async function Chart({ id }: { id: string }) {
       </Wrapper>
       <hr />
       <div className="h-full flex items-center px-12">
+        <LineChartRate data={data} />
         <PopulationChart data={data} />
       </div>
     </section>

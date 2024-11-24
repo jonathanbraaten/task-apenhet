@@ -12,7 +12,7 @@ import {
   YAxis,
 } from 'recharts';
 
-export default function PopulationChart({ data }: { data: PopulationData[] }) {
+export default function PopulationBarChart({ data }: { data: PopulationData[] }) {
   const formattedData = data
     .map(({ date, value }: { date: string; value: number }) => {
       return {
@@ -33,7 +33,7 @@ export default function PopulationChart({ data }: { data: PopulationData[] }) {
         <Tooltip />
         <Legend />
         <Bar dataKey="population" fill="#8884d8" />
-        <Bar dataKey="uv" fill="#82ca9d" />
+        <Bar dataKey="growthRate" fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );
