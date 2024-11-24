@@ -1,16 +1,16 @@
-import CountriesView from './components/countries-view';
+import RenderCountries from './components/render-countries';
 
 export default async function DashboardPage({
   searchParams,
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { page = 1 } = await searchParams;
+  const { page } = await searchParams;
   const currentPage = Number(page);
 
   return (
     <section className="grow">
-      <CountriesView page={currentPage} />
+      <RenderCountries page={currentPage} />
     </section>
   );
 }

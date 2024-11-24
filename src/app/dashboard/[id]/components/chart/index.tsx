@@ -1,4 +1,4 @@
-import { fetchCountry } from '@/app/actions/actions';
+import { fetchCountry } from '@/app/actions/fetchCountry';
 import PopulationGrowthByYearChart from './growth-by-year-chart';
 import AnnualPopulationChart from './annual-population-chart';
 

@@ -1,7 +1,8 @@
-'use server';
-import { PopulationData, WorldBankAPIResponse } from '../types';
+import { redirect } from 'next/navigation';
+import { WorldBankAPIResponse } from '../types';
 
 const revalidationTime = 3600;
+
 async function initialResponse(): Promise<WorldBankAPIResponse> {
   try {
     const initialResponse = await fetch(
@@ -26,6 +27,7 @@ async function initialResponse(): Promise<WorldBankAPIResponse> {
 export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse> {
   if (!page || page < 1) {
     page = 1;
+    redirect(`/dashboard?page=${page}`);
   }
 
   try {
@@ -39,42 +41,19 @@ export async function fetchCountries({ page = 1 }): Promise<WorldBankAPIResponse
       throw new Error('Invalid API response');
     }
     const [metadata, countries] = data as WorldBankAPIResponse;
+
     if (page > metadata.pages) {
       page = 1;
+      redirect(`/dashboard?page=${page}`);
     }
     if (metadata.page > metadata.pages) {
       return await initialResponse();
     }
     return [metadata, countries];
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      throw error;
     }
     return await initialResponse();
   }
-}
-
-export async function fetchCountry(id: string, revalidate = 3600): Promise<PopulationData[]> {
-  const storage = [];
-  const initialFetch = await fetch(
-    `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json`,
-    {
-      next: { revalidate: revalidate },
-    },
-  );
-  const [metadata] = await initialFetch.json();
-  const meta = { ...metadata };
-  meta.page = 0;
-  while (meta.page < meta.pages) {
-    ++meta.page;
-    const response = await fetch(
-      `https://api.worldbank.org/v2/country/${id}/indicator/SP.POP.TOTL?format=json&page=${meta.page}`,
-      {
-        cache: 'force-cache',
-      },
-    );
-    const [, data] = await response.json();
-    storage.push(...data);
-  }
-  return storage;
 }

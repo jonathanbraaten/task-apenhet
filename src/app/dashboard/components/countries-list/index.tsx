@@ -1,4 +1,4 @@
-import { fetchCountries } from '@/app/actions/actions';
+import { fetchCountries } from '@/app/actions/fetchCountries';
 import Wrapper from '@/app/components/wrapper';
 import { abeezee } from '@/ui/fonts';
 import clsx from 'clsx';
@@ -11,12 +11,6 @@ export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
   const region = data[0]?.region.value || 'No region provided';
 
-  for (const countries of data) {
-    /*     console.log(countries['id']);
-    console.log(countries['name']); */
-    const test = countries['name'].substring(0, 3);
-    console.log(test);
-  }
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col py-10 h-full ')}>
       <Wrapper optionalStyle="flex justify-between items-center">
