@@ -10,7 +10,6 @@ import Pagination from './pagination';
 export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
   const region = data[0]?.region.value || 'No region provided';
-  console.log(data);
 
   return (
     <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
