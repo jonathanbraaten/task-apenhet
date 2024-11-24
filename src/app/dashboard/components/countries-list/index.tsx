@@ -1,60 +1,44 @@
 import { fetchCountries } from '@/app/actions/actions';
 import Wrapper from '@/app/components/wrapper';
-import { abeezee, montserrat } from '@/ui/fonts';
-import Image from 'next/image';
+import { abeezee } from '@/ui/fonts';
 import clsx from 'clsx';
-import Link from 'next/link';
 import styles from './style.module.css';
 import Pagination from './pagination';
+import CountriesCard from './countries-card';
+import CountriesNav from './countries-nav';
 
 export default async function CountriesList({ page }: { page: number }) {
   const [metadata, data] = await fetchCountries({ page });
   const region = data[0]?.region.value || 'No region provided';
 
+  for (const countries of data) {
+    /*     console.log(countries['id']);
+    console.log(countries['name']); */
+    const test = countries['name'].substring(0, 3);
+    console.log(test);
+  }
   return (
-    <section className={clsx(styles.background_pattern, 'flex flex-col gap-10 py-10 h-full ')}>
+    <section className={clsx(styles.background_pattern, 'flex flex-col py-10 h-full ')}>
       <Wrapper optionalStyle="flex justify-between items-center">
-        <h1 className={clsx(abeezee.className, 'text-2xl')}>{region}</h1>
-        <Pagination totalPages={metadata.pages} />
+        <h1 className={clsx(abeezee.className, 'text-2xl py-5')}>
+          Historical populations and growth rate for the countries in {region}
+        </h1>
       </Wrapper>
       <hr />
 
       <Wrapper>
+        <CountriesNav>
+          <Pagination totalPages={metadata.pages} />
+        </CountriesNav>
         <ul id="country_list__grid">
           {data.map(({ id, name, capitalCity, iso2Code }) => (
-            <li
-              className="flex flex-col  group relative p-5 border rounded-md focus:bg-gray-100 active:bg-gray-100  hover:bg-gray-100 transition-colors duration-75"
+            <CountriesCard
               key={id}
-            >
-              <div className="flex justify-between items-center">
-                <h2 className={clsx(montserrat.className, 'text-lg font-medium')}>{name}</h2>
-                <div className="max-w-[2.5rem] bg-slate-200  border-2 rounded-full">
-                  <Image
-                    src={`https://flagsapi.com/${iso2Code}/flat/64.png`}
-                    alt={`Image of flag for country with iso2code: ${iso2Code}`}
-                    width={50}
-                    height={50}
-                    quality={100}
-                    priority={true}
-                    className="aspect-square p-2"
-                    sizes="(max-width:768px) 100vw, 33vw"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col my-2">
-                <p>
-                  <span>Capital:</span> {capitalCity}
-                </p>
-              </div>
-
-              <div className=" opacity-0 group-hover:opacity-100 group-active:opacity-100 group-focus:opacity-100 transition-opacity">
-                <span className="text-black">View details →</span>
-              </div>
-
-              <Link className="absolute inset-0" href={`/dashboard/${id}?chart=growthByYear`}>
-                <span className="sr-only">View details for {name}</span>
-              </Link>
-            </li>
+              id={id}
+              name={name}
+              capitalCity={capitalCity}
+              iso2Code={iso2Code}
+            />
           ))}
         </ul>
       </Wrapper>
