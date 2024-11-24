@@ -12,7 +12,7 @@ export const fetchStoreData = create((set) => ({
 
       set({ store: [...data] });
     } catch (error) {
-      console.error('Error: No data returned');
+      console.error('Error: No data returned', error);
     }
   },
 }));

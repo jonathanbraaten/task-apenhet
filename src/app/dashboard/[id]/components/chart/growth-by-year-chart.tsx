@@ -1,8 +1,7 @@
 'use client';
 
-import { fetchStoreData } from '@/app/store/store';
 import { PopulationData } from '@/app/types';
-import { useEffect } from 'react';
+
 import {
   Bar,
   BarChart,
