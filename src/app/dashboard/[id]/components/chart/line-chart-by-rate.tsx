@@ -1,6 +1,6 @@
 'use client';
 import { PopulationData } from '@/app/types';
-import { calculateGrowthByDecade, calculateGrowthByYear } from '@/app/utils/growthCalculations';
+import { calculateGrowthByYear } from '@/app/utils/growthCalculations';
 import {
   LineChart,
   Line,
@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-export default function LineChartRate({ data }: { data: PopulationData[] }) {
+export default function LineChartByRate({ data }: { data: PopulationData[] }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart

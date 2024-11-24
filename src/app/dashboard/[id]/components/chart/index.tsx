@@ -1,6 +1,6 @@
 import { fetchCountry } from '@/app/actions/actions';
-import PopulationChart from './bar-chart';
-import LineChartRate from './line-chart-rate';
+import LineChartByYear from './line-chart-by-year';
+import LineChartByRate from './line-chart-by-rate';
 import Wrapper from '@/app/components/wrapper';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -29,9 +29,9 @@ export default async function Chart({ id }: { id: string }) {
         </div>
       </Wrapper>
       <hr />
-      <div className="h-full flex items-center px-12">
-        <LineChartRate data={data} />
-        <PopulationChart data={data} />
+      <div className="h-full flex items-center px-12 ">
+        <LineChartByRate data={data} />
+        <LineChartByYear data={data} />
       </div>
     </section>
   );
