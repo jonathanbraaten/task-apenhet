@@ -1,4 +1,3 @@
-import Sidebar from '@/app/components/sidebar';
 import CountryView from './components/country-view';
 import { fetchCountry } from '@/app/actions/actions';
 import { abeezee } from '@/ui/fonts';
