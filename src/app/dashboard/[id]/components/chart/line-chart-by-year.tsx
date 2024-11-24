@@ -2,8 +2,6 @@
 
 import { PopulationData } from '@/app/types';
 import {
-  Bar,
-  BarChart,
   CartesianGrid,
   Legend,
   Line,
